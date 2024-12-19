@@ -1,0 +1,118 @@
+# Smart Inventory Management System
+
+## Overview
+The **Smart Inventory Management System** is a web application designed to help users manage inventory efficiently using natural language processing (NLP). The system allows users to add, update, and query item information through intuitive text or voice commands. Built with a Flask backend and Vue.js frontend, the application ensures seamless interaction and robust performance.
+
+## Features
+- **Natural Language Input**: Add and update inventory using commands like "Add 50 units of Amul butter" or "Update 4kg stock of rice".
+- **Command Parsing**: Interpret natural language inputs for inventory operations.
+- **Inventory Database**: Store and manage inventory details.
+- **User Authentication**: Secure the application with JWT-based user authentication.
+- **Real-time Updates**: View inventory changes in real-time using WebSockets or server-sent events (SSE).
+- **Reports and Analytics**: Generate insightful reports on inventory trends and usage.
+
+## Tech Stack
+- **Frontend**: Vue.js
+- **Backend**: Flask
+- **Database**: SQLite
+- **NLP Library**: SpaCy
+- **Authentication**: Flask-JWT-Extended
+- **Real-time Updates**: Flask-SocketIO
+
+---
+
+## Installation Guide
+
+### Backend Setup
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/lazycoder54/Smart-inventory-Webapp
+    cd smart-inventory-backend
+    ```
+
+2. Create a virtual environment and activate it:
+    - On Windows:
+      ```bash
+      python -m venv venv
+      .\venv\Scripts\activate
+      ```
+    - On macOS/Linux:
+      ```bash
+      python3 -m venv venv
+      source venv/bin/activate
+      ```
+
+3. Install the dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. Run the Flask application:
+    ```bash
+    flask run
+    ```
+
+   The backend will start running on `http://127.0.0.1:5000`.
+
+### Frontend Setup
+1. Navigate to the frontend directory:
+    ```bash
+    cd smart-inventory-frontend
+    ```
+
+2. Install the dependencies:
+    ```bash
+    npm install
+    ```
+
+3. Start the development server:
+    ```bash
+    npm run dev
+    ```
+
+   The frontend will be available at `http://localhost:5173` (default Vite development server port).
+
+---
+
+## Usage
+1. Open the webapp in your browser.
+2. Log in with your credentials.
+3. Use natural language commands to manage your inventory.
+   - Example commands:
+     - "Add 10 units of apples"
+     - "Update the 5kg stock of apple"
+4. View real-time inventory updates and analytics on the dashboard.
+
+---
+
+## Contributing
+Contributions are welcome! Follow these steps to contribute:
+1. Fork the repository.
+2. Create a feature branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Commit your changes and push to the branch:
+   ```bash
+   git add .
+   git commit -m "Add feature-name"
+   git push origin feature-name
+   ```
+4. Open a pull request.
+
+---
+
+## License
+This project is licensed under the MIT License
+
+---
+
+## Contact
+For questions or support, please contact:
+- **Email**: pranjitd865@gmail.com
+- **GitHub**: https://github.com/lazycoder54
+
+---
+
+Happy coding!
+

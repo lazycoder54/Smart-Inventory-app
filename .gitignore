@@ -1,0 +1,49 @@
+# Backend environment files
+.env
+
+# Frontend environment files (for Vite)
+frontend/.env
+
+# Firebase service account key (for backend)
+serviceAccountKey.json
+
+# Node.js related files (for frontend)
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules
+
+# macOS system files
+.DS_Store
+
+# Build output (for frontend)
+dist
+dist-ssr
+
+# Code coverage and testing
+coverage
+*.local
+
+# Cypress (if used)
+cypress/videos/
+cypress/screenshots/
+
+# IDE/editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# TypeScript build info
+*.tsbuildinfo
