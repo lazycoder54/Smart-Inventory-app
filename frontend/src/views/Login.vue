@@ -151,7 +151,6 @@ body {
   height: 100vh;
   width: 100vw;
   position: relative;
-  background-image: url("../assets/background.png");
   background-size: cover;
   background-position: center;
   filter: none;

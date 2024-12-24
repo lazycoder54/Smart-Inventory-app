@@ -35,4 +35,4 @@ app.register_blueprint(inventory_bp, url_prefix="/inventory")
 from models import User, InventoryItem, InventoryMovement
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True)
+    socketio.run(app, host="127.0.0.1", port=5000, debug=True)

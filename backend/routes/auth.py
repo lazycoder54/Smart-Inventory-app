@@ -11,8 +11,7 @@ from flask_jwt_extended import (
 import firebase_admin 
 from firebase_admin import auth, credentials 
 
-cred_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-cred = credentials.Certificate(cred_path)
+cred = credentials.Certificate(os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
 firebase_admin.initialize_app(cred)
 
 auth_bp = Blueprint("auth", __name__)
