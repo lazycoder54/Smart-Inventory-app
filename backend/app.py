@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config.from_object("config.Config")
 frontend_url = os.getenv("FRONTEND_URL")
 
-CORS(app, supports_credentials=True, origins=frontend_url)
+CORS(app, supports_credentials=True)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)

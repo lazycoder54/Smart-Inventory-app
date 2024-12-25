@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-const socket = io("https://smart-inventory-app.onrender.com/"); 
+const socket = io(import.meta.env.VITE_API_BASE_URL); 
 
 export default {
   install(app) {
