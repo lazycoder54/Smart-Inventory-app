@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config.from_object("config.Config")
 frontend_url = os.getenv("FRONTEND_URL")
 
-CORS(app, supports_credentials=True)
+CORS(app, supports_credentials=True, origins=frontend_url)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -37,5 +37,5 @@ app.register_blueprint(inventory_bp, url_prefix="/inventory")
 from models import User, InventoryItem, InventoryMovement
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(app, host="0.0.0.0", port=5000)
 
