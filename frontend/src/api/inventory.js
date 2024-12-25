@@ -29,7 +29,7 @@ axiosInstance.interceptors.response.use(
       if (refreshToken) {
         try {
           const response = await axios.post(
-            "http://127.0.0.1:5000/auth/refresh",
+            "https://smart-inventory-app.onrender.com/auth/refresh",
             {},
             {
               headers: {

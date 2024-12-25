@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
@@ -9,13 +10,14 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config.from_object("config.Config")
+frontend_url = os.getenv("FRONTEND_URL")
 
 CORS(app, supports_credentials=True)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 jwt = JWTManager(app)
-socketio = SocketIO(app, cors_allowed_origins="http://localhost:5173")  
+socketio = SocketIO(app, cors_allowed_origins=frontend_url)  
 
 @socketio.on('connect')
 def handle_connect():
