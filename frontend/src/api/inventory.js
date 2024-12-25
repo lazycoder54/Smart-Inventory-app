@@ -29,7 +29,7 @@ axiosInstance.interceptors.response.use(
       if (refreshToken) {
         try {
           const response = await axios.post(
-            "https://smart-inventory-app.onrender.com/auth/refresh",
+            `${import.meta.env.VITE_API_BASE_URL}/auth/refresh`, 
             {},
             {
               headers: {
@@ -40,8 +40,6 @@ axiosInstance.interceptors.response.use(
 
           const newAccessToken = response.data.access_token;
           localStorage.setItem("jwt_token", newAccessToken);
-
-          // Retry the original request with the new token
           error.config.headers["Authorization"] = `Bearer ${newAccessToken}`;
           return axios(error.config);
         } catch (err) {
