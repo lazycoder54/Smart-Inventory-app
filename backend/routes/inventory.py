@@ -1,7 +1,8 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt, get_jwt_identity
 from app import db, socketio
-from utils.nlp_parser import parse_command, speak_text
+from utils.nlp_parser import parse_command 
+# speak_text
 from sqlalchemy import func
 from utils.voice_recognition import recognize_speech_from_mic, stop_recognition
 import time
@@ -183,7 +184,7 @@ def add_item_voice():
                 db.session.add(new_item) 
             db.session.commit()
             
-            speak_text(f"Item '{parsed_data['name']}' added successfully.")
+            # speak_text(f"Item '{parsed_data['name']}' added successfully.")
             response_message = f'{command}'
             return jsonify(message=response_message), 201
 
@@ -197,11 +198,11 @@ def add_item_voice():
             if existing_item:
                 existing_item.quantity = parsed_data["quantity"]
                 db.session.commit()
-                speak_text(f"Item '{parsed_data['name']}' updated successfully.")
+                # speak_text(f"Item '{parsed_data['name']}' updated successfully.")
                 response_message = f'{command}'
                 return jsonify(message=response_message), 200
             else:
-                speak_text(f"Item '{parsed_data['name']}' not found.")
+                # speak_text(f"Item '{parsed_data['name']}' not found.")
                 response_message = f"Item '{parsed_data['name']}' not found."
                 return jsonify(message=response_message), 404
 
@@ -221,7 +222,7 @@ def add_item_voice():
                             f"after removing {parsed_data['quantity']} {parsed_data['unit']} will be nil. "
                             "Are you sure you want to delete it?"
                         )
-                        speak_text(warning_message)
+                        # speak_text(warning_message)
                         response_message = warning_message 
                 
                         return jsonify(message=response_message, action_required="confirm_deletion"), 409
@@ -238,7 +239,7 @@ def add_item_voice():
                     response_message = f"Item '{parsed_data['name']}' not found in inventory."
                 
                 if response_message:  
-                    speak_text(response_message)
+                    # speak_text(response_message)
                     return jsonify(message=response_message), (200 if existing_item else 404)
                 else:
                     
@@ -248,7 +249,7 @@ def add_item_voice():
                 # Handle unexpected errors
                 error_message = f"An unexpected error occurred: {str(e)}"
                 
-                speak_text("An error occurred while processing your request.")
+                # speak_text("An error occurred while processing your request.")
                 return jsonify(message=error_message), 500    
 
         elif parsed_data['action'] == 'search':
@@ -259,19 +260,19 @@ def add_item_voice():
             ).first()
 
             if item:
-                speak_text(f"Item '{item.name}' found with quantity {item.quantity} {item.unit}.")
+                # speak_text(f"Item '{item.name}' found with quantity {item.quantity} {item.unit}.")
                 return jsonify(item={"name": item.name, "quantity": item.quantity, "unit": item.unit}), 200
             else:
-                speak_text(f"Item '{item_name}' not found.")
+                # speak_text(f"Item '{item_name}' not found.")
                 return jsonify(message="Item not found"), 404
 
         else:
-            speak_text("Unknown action.")
+            # speak_text("Unknown action.")
             return jsonify(message="Unknown action"), 400
 
     except ValueError as ve:
         
-        speak_text(f"Error: {str(ve)}")
+        # speak_text(f"Error: {str(ve)}")
         return jsonify({"error": str(ve)}), 400
     except Exception as e:     
         return jsonify({"error": "An unexpected error occurred. Please try again later."}), 500
@@ -321,10 +322,10 @@ def process_command():
                 if existing_item:
                     existing_item.quantity = parsed_data["quantity"]
                     db.session.commit()
-                    speak_text(f"Item '{parsed_data['name']}' updated successfully.")
+                    # speak_text(f"Item '{parsed_data['name']}' updated successfully.")
                     return jsonify(message="Item updated successfully"), 200
                 else:
-                    speak_text(f"Item '{parsed_data['name']}' not found.")
+                    # speak_text(f"Item '{parsed_data['name']}' not found.")
                     return jsonify(message="Item not found"), 404
             except Exception as e:
                 error_message = f"An unexpected error occurred: {str(e)}"
@@ -342,13 +343,13 @@ def process_command():
                 existing_item.quantity -= parsed_data["quantity"]
                 if existing_item.quantity <= 0:
                     db.session.delete(existing_item)
-                    speak_text(f"Item '{parsed_data['name']}' removed from inventory.")
+                    # speak_text(f"Item '{parsed_data['name']}' removed from inventory.")
                 else:
-                    speak_text(f"Item '{parsed_data['name']}' updated with reduced quantity.")
-                db.session.commit()
+                    # speak_text(f"Item '{parsed_data['name']}' updated with reduced quantity.")
+                    db.session.commit()
                 return jsonify(message="Item removed successfully"), 200
             else:
-                speak_text(f"Item '{parsed_data['name']}' not found.")
+                # speak_text(f"Item '{parsed_data['name']}' not found.")
                 return jsonify(message="Item not found"), 404
         
         elif parsed_data['action'] == 'show_stock':
@@ -356,10 +357,10 @@ def process_command():
             items = InventoryItem.query.all()
             if items:
                 stock_list = [{"name": item.name, "quantity": item.quantity, "unit": item.unit} for item in items]
-                speak_text("Current inventory stock shown.")
+                # speak_text("Current inventory stock shown.")
                 return jsonify(stock_list=stock_list), 200
             else:
-                speak_text("Inventory is empty.")
+                # speak_text("Inventory is empty.")
                 return jsonify(message="No items in inventory"), 404
         
         elif parsed_data['action'] == 'search':
@@ -370,23 +371,23 @@ def process_command():
             ).first()
 
             if item:
-                speak_text(f"Item '{item.name}' found with quantity {item.quantity} {item.unit}.")
+                # speak_text(f"Item '{item.name}' found with quantity {item.quantity} {item.unit}.")
                 return jsonify(item={"name": item.name, "quantity": item.quantity, "unit": item.unit}), 200
             else:
-                speak_text(f"Item '{item_name}' not found.")
+                # speak_text(f"Item '{item_name}' not found.")
                 return jsonify(message="Item not found"), 404
 
         else:
-            speak_text("Unknown action.")
+            # speak_text("Unknown action.")
             return jsonify(message="Unknown action"), 400
 
     except ValueError as e:
         
-        speak_text(f"Error: {str(e)}")
+        # speak_text(f"Error: {str(e)}")
         return jsonify(message=str(e)), 400
     except Exception as e:
         
-        speak_text("An unexpected error occurred.")
+        # speak_text("An unexpected error occurred.")
         return jsonify(message="An unexpected error occurred"), 500
 
     

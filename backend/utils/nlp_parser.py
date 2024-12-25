@@ -1,6 +1,6 @@
 import spacy
 import re
-import pyttsx3
+# import pyttsx3
 import threading
 
 nlp = spacy.load("en_core_web_sm")
@@ -56,20 +56,20 @@ def parse_command(command):
           
     raise ValueError("Could not parse the command. Please check the format.")
 
-tts_lock = threading.Lock()
+# tts_lock = threading.Lock()
 
-engine = pyttsx3.init()
-engine.setProperty('rate', 150)  
-engine.setProperty('volume', 1)
+# engine = pyttsx3.init()
+# engine.setProperty('rate', 150)  
+# engine.setProperty('volume', 1)
 
-def speak_text(text):
-    def run_tts():
-        try:
-            with tts_lock:
-                engine.say(text)
-                engine.runAndWait()
-        except Exception as e:
-            print(f"TTS Error: {e}")
+# def speak_text(text):
+#     def run_tts():
+#         try:
+#             with tts_lock:
+#                 engine.say(text)
+#                 engine.runAndWait()
+#         except Exception as e:
+#             print(f"TTS Error: {e}")
 
-    tts_thread = threading.Thread(target=run_tts)
-    tts_thread.start()
+#     tts_thread = threading.Thread(target=run_tts)
+#     tts_thread.start()
